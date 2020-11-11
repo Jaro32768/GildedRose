@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GildedRose;
 
 namespace GildedRose
 {
@@ -22,8 +23,70 @@ namespace GildedRose
         /// </summary>
         public void UpdateQuality()
         {
-            // TODO ...
-            // Hint: Iterate through this.items and check Name property to access specific item
+            foreach (var item in items)
+            {
+                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                {
+                    if (item.SellIn == 0)
+                    {
+                        if (item.Name == "Aged Brie")
+                        {
+                            item.Quality += 2;
+                        }
+                        else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            item.Quality = 0;
+
+                        }
+                        else
+                        {
+                            item.Quality -= 2;
+                        }
+                        if (item.Name == "Conjured Mana Cake")
+                        {
+                            item.Quality -= 2;
+                        }
+
+                    }
+                    else
+                    {
+                        if (item.Name == "Aged Brie")
+                        {
+                            item.Quality++;
+                        }
+                        else if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        {
+                            item.Quality++;
+                            if (item.SellIn <= 10)
+                            {
+                                item.Quality++;
+                            }
+                            if (item.SellIn <= 5)
+                            {
+                                item.Quality++;
+                            }
+                        }
+                        else
+                        {
+                            item.Quality--;
+
+                        }
+                        if (item.Name == "Conjured Mana Cake")
+                        {
+                            item.Quality--;
+                        }
+                    }
+                    item.SellIn--;
+                    if (item.Quality < 1)
+                    {
+                        item.Quality = 0;
+                    }
+                    else if (item.Quality > 50)
+                    {
+                        item.Quality = 50;
+                    }
+                }
+            }
         }
     }
 }
